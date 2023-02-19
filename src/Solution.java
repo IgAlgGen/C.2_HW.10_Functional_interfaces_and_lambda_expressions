@@ -89,6 +89,9 @@ public class Solution {
         System.out.println("\n----- Задание 5 (опциональное) -----\n");
 
         // функция ternaryOperator выглядит логически правильно, но я не смог придумать ей проверку.
+        String str = "asd asd";
+
+        System.out.println(ternaryOperator1(Objects::nonNull, s -> str.length(), s -> str.lastIndexOf("s")).apply(null));
 
     }
 
@@ -101,6 +104,18 @@ public class Solution {
             Predicate<? super T> condition,
             Function<? super T, ? extends U> ifTrue,
             Function<? super T, ? extends U> ifFalse) {
+        return x -> {
+            if (condition.test(x)) {
+                return ifTrue.apply(x);
+            } else {
+                return ifFalse.apply(x);
+            }
+        };
+    }
+    public static Function<String, Integer> ternaryOperator1(
+            Predicate<String> condition,
+            Function<String, Integer> ifTrue,
+            Function<String, Integer> ifFalse) {
         return x -> {
             if (condition.test(x)) {
                 return ifTrue.apply(x);
